@@ -1,0 +1,746 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --f1-red: #E10600;
+  --f1-black: #15151E;
+  --f1-dark: #1E1E28;
+  --f1-gray: #38383F;
+  --f1-silver: #C0C0C0;
+  --f1-white: #FFFFFF;
+  --f1-carbon: #0A0A0E;
+  --f1-gold: #FFD700;
+  --f1-green: #00D26A;
+  --f1-blue: #3671C6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--f1-carbon);
+  font-family: 'Titillium Web', 'Segoe UI', 'Arial', sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* F1 Dashboard Container */
+.f1-dashboard {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--f1-carbon) 0%, #0A0A10 100%);
+  position: relative;
+}
+
+/* Carbon Fiber Texture */
+.f1-dashboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 40%, rgba(255,255,255,0.02) 1px, transparent 1px),
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.003) 2px, rgba(255,255,255,0.003) 4px);
+  background-size: 20px 20px, 4px 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animated track lines overlay */
+.track-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+.track-lines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 50px,
+    rgba(225,6,0,0.1) 50px,
+    rgba(225,6,0,0.1) 52px
+  );
+  animation: trackMove 20s linear infinite;
+}
+
+@keyframes trackMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100px); }
+}
+
+/* Main Grid Layout */
+.dashboard-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 80px 1fr 45px;
+  height: 100vh;
+  width: 100vw;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* F1 TV Style Header */
+.f1-header {
+  background: linear-gradient(180deg, var(--f1-black) 0%, var(--f1-carbon) 100%);
+  border-bottom: 3px solid var(--f1-red);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.f1-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--f1-red), transparent);
+  animation: headerGlow 3s ease-in-out infinite;
+}
+
+@keyframes headerGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.f1-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(225,6,0,0.15), transparent);
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.logo-area {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.f1-logo {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--f1-red);
+  letter-spacing: -1px;
+  text-shadow: 0 0 10px rgba(225,6,0,0.5);
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { text-shadow: 0 0 10px rgba(225,6,0,0.5); }
+  50% { text-shadow: 0 0 20px rgba(225,6,0,0.8); }
+}
+
+.f1-logo span {
+  color: var(--f1-white);
+  font-weight: 700;
+}
+
+.event-name {
+  color: var(--f1-silver);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.timer-area {
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  padding: 8px 24px;
+  border-radius: 4px;
+  border: 1px solid rgba(225,6,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.timer-area::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(225,6,0,0.2), transparent);
+  animation: timerGlow 3s linear infinite;
+}
+
+@keyframes timerGlow {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.timer-label {
+  color: var(--f1-silver);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.timer-value {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--f1-red);
+  font-family: 'Courier New', monospace;
+  letter-spacing: 3px;
+  line-height: 1;
+  text-shadow: 0 0 5px rgba(225,6,0,0.5);
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(225,6,0,0.15);
+  padding: 6px 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(225,6,0,0.3);
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--f1-red);
+  border-radius: 50%;
+  animation: livePulse 1s ease-in-out infinite;
+  box-shadow: 0 0 5px var(--f1-red);
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.live-text {
+  color: var(--f1-red);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+/* Main Content - F1 TV Style Layout */
+.main-content {
+  display: grid;
+  grid-template-columns: 300px 1fr 320px;
+  gap: 12px;
+  padding: 12px 20px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* F1 TV Left Sidebar - Driver/Team Tracker */
+.f1-sidebar {
+  background: linear-gradient(135deg, rgba(21,21,30,0.98) 0%, rgba(10,10,14,0.98) 100%);
+  border-right: 2px solid var(--f1-red);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.f1-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--f1-red), transparent);
+}
+
+.sidebar-header {
+  background: linear-gradient(90deg, var(--f1-red) 0%, rgba(225,6,0,0.3) 100%);
+  padding: 12px;
+}
+
+.sidebar-header h2 {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--f1-white);
+  text-transform: uppercase;
+}
+
+.sidebar-header p {
+  font-size: 9px;
+  color: var(--f1-silver);
+  margin-top: 4px;
+}
+
+.driver-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.driver-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.driver-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(225,6,0,0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.driver-item:hover::before {
+  left: 100%;
+}
+
+.driver-item:hover {
+  background: rgba(225,6,0,0.1);
+  transform: translateX(5px);
+}
+
+.driver-position {
+  width: 30px;
+  font-weight: 900;
+  color: var(--f1-red);
+  font-size: 14px;
+}
+
+.driver-info {
+  flex: 1;
+}
+
+.driver-name {
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--f1-white);
+}
+
+.driver-team {
+  font-size: 9px;
+  color: var(--f1-silver);
+}
+
+.driver-color {
+  width: 3px;
+  height: 35px;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+
+.driver-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--f1-gold);
+  font-family: monospace;
+}
+
+/* Center Column */
+.center-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* Main Championship Table */
+.main-table-container {
+  background: linear-gradient(135deg, rgba(30,30,40,0.95) 0%, rgba(21,21,30,0.98) 100%);
+  border: 1px solid rgba(225,6,0,0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  position: relative;
+}
+
+.main-table-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent,
+    transparent 2px,
+    rgba(225,6,0,0.02) 2px,
+    rgba(225,6,0,0.02) 4px
+  );
+  pointer-events: none;
+}
+
+.table-header {
+  background: linear-gradient(90deg, var(--f1-red) 0%, rgba(225,6,0,0.3) 100%);
+  padding: 12px 16px;
+}
+
+.table-header h2 {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--f1-white);
+  text-transform: uppercase;
+}
+
+.table-header p {
+  font-size: 10px;
+  color: var(--f1-silver);
+  margin-top: 4px;
+}
+
+.data-table {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.data-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead {
+  position: sticky;
+  top: 0;
+  background: var(--f1-dark);
+  z-index: 10;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 12px;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--f1-silver);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--f1-red);
+}
+
+.data-table td {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--f1-white);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.data-table tbody tr {
+  transition: all 0.3s ease;
+  animation: rowFadeIn 0.5s ease forwards;
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+@keyframes rowFadeIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.data-table tbody tr:hover {
+  background: rgba(225,6,0,0.1);
+  transform: scale(1.01);
+}
+
+/* Mini Boards Grid */
+.mini-boards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+}
+
+.mini-board {
+  background: linear-gradient(135deg, rgba(30,30,40,0.95) 0%, rgba(21,21,30,0.98) 100%);
+  border: 1px solid rgba(225,6,0,0.2);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.mini-board:hover {
+  transform: translateY(-2px);
+  border-color: var(--f1-red);
+  box-shadow: 0 5px 20px rgba(225,6,0,0.2);
+}
+
+.mini-board-header {
+  background: rgba(225,6,0,0.15);
+  padding: 8px;
+}
+
+.mini-board-header h3 {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--f1-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mini-board-table {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.mini-board-table table {
+  width: 100%;
+}
+
+.mini-board-table th {
+  padding: 6px;
+  font-size: 8px;
+}
+
+.mini-board-table td {
+  padding: 5px 6px;
+  font-size: 9px;
+}
+
+/* Right Sidebar */
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* Goal Tracker - Real Race Track with Cars */
+.goal-tracker {
+  background: linear-gradient(135deg, rgba(21,21,30,0.98) 0%, rgba(10,10,14,0.98) 100%);
+  border: 2px solid var(--f1-red);
+  border-radius: 8px;
+  overflow: hidden;
+  flex: 1;
+  position: relative;
+}
+
+.goal-header {
+  background: linear-gradient(90deg, var(--f1-red) 0%, rgba(225,6,0,0.3) 100%);
+  padding: 12px;
+}
+
+.goal-header h3 {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--f1-white);
+  text-transform: uppercase;
+}
+
+.race-track-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: calc(100% - 50px);
+  overflow-y: auto;
+  position: relative;
+}
+
+.race-track-line {
+  position: relative;
+  height: 45px;
+  background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(225,6,0,0.2);
+}
+
+.race-track-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 20px,
+    rgba(255,255,255,0.03) 20px,
+    rgba(255,255,255,0.03) 21px
+  );
+  pointer-events: none;
+}
+
+.track-number {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--f1-red);
+  z-index: 2;
+  text-shadow: 0 0 3px black;
+}
+
+.track-car {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.5));
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+}
+
+.track-car span {
+  display: inline-block;
+  animation: carShake 0.3s ease-in-out infinite;
+}
+
+@keyframes carShake {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-1px); }
+}
+
+.track-team-code {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--f1-silver);
+  z-index: 2;
+  background: rgba(0,0,0,0.6);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.track-progress-percent {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--f1-gold);
+  z-index: 2;
+  background: rgba(0,0,0,0.7);
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-family: monospace;
+}
+
+/* Admin Button on Main Page */
+.admin-button {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  background: linear-gradient(135deg, var(--f1-red), #8B0000);
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 2px;
+  z-index: 100;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(225,6,0,0.5);
+  animation: adminPulse 2s ease-in-out infinite;
+}
+
+@keyframes adminPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(225,6,0,0.5); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(225,6,0,0.8); }
+}
+
+.admin-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(225,6,0,0.8);
+}
+
+/* Footer */
+.f1-footer {
+  background: var(--f1-black);
+  border-top: 1px solid var(--f1-red);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: 9px;
+  color: var(--f1-silver);
+  position: relative;
+  overflow: hidden;
+}
+
+.f1-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(225,6,0,0.1), transparent);
+  animation: footerScan 10s linear infinite;
+}
+
+@keyframes footerScan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.footer-message {
+  display: flex;
+  gap: 20px;
+}
+
+/* Hide scrollbars */
+.data-table::-webkit-scrollbar,
+.mini-board-table::-webkit-scrollbar,
+.driver-list::-webkit-scrollbar,
+.race-track-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+
