@@ -33,7 +33,7 @@ type BoardRow = {
  o9: number;
  i9: number;
  score: number;
- rank: number | "--";
+ rank: number;
  color: string;
 };
 
@@ -63,7 +63,7 @@ const FALLBACK_ROWS: DashboardRow[] = [
   { row_id: "medina", row_label: "MEDINA", approved_total: 20, realized_total: 1, completed_total: 0, finished_total: 0, applied_total: 20, o_approved_7: 0, i_approved_7: 0, o_approved_8: 0, i_approved_8: 0, o_approved_9: 0, i_approved_9: 0 },
   { row_id: "nabel", row_label: "NABEL", approved_total: 5, realized_total: 1, completed_total: 0, finished_total: 0, applied_total: 5, o_approved_7: 0, i_approved_7: 0, o_approved_8: 0, i_approved_8: 0, o_approved_9: 0, i_approved_9: 0 },
   { row_id: "university", row_label: "UNIVERSITY", approved_total: 25, realized_total: 1, completed_total: 0, finished_total: 0, applied_total: 25, o_approved_7: 0, i_approved_7: 0, o_approved_8: 0, i_approved_8: 0, o_approved_9: 0, i_approved_9: 0 },
-  { row_id: "BullaRegia", row_label: "BullaRegia", approved_total: 1, realized_total: 0, completed_total: 0, finished_total: 0, applied_total: 1, o_approved_7: 0, i_approved_7: 0, o_approved_8: 0, i_approved_8: 0, o_approved_9: 0, i_approved_9: 0 },
+  { row_id: "6707", row_label: "6707", approved_total: 1, realized_total: 0, completed_total: 0, finished_total: 0, applied_total: 1, o_approved_7: 0, i_approved_7: 0, o_approved_8: 0, i_approved_8: 0, o_approved_9: 0, i_approved_9: 0 },
   { row_id: "bizerte", row_label: "Bizerte", approved_total: 6, realized_total: 0, completed_total: 0, finished_total: 0, applied_total: 6, o_approved_7: 0, i_approved_7: 0, o_approved_8: 0, i_approved_8: 0, o_approved_9: 0, i_approved_9: 0 },
   { row_id: "ruspina", row_label: "RUSPINA", approved_total: 5, realized_total: 0, completed_total: 0, finished_total: 0, applied_total: 5, o_approved_7: 0, i_approved_7: 0, o_approved_8: 0, i_approved_8: 0, o_approved_9: 0, i_approved_9: 0 },
   { row_id: "sfax", row_label: "SFAX", approved_total: 8, realized_total: 0, completed_total: 0, finished_total: 0, applied_total: 8, o_approved_7: 0, i_approved_7: 0, o_approved_8: 0, i_approved_8: 0, o_approved_9: 0, i_approved_9: 0 },
@@ -87,16 +87,6 @@ function initials(value: string): string {
  if (words.length === 0) return "ID";
  if (words.length === 1) return words[0].slice(0, 3).toUpperCase();
  return words.slice(0, 2).map((w) => w[0]).join("").toUpperCase();
-}
-
-const LC_DISPLAY_NAME_MAP: Record<string, string> = {
-  "6707": "BullaRegia",
-  "BullaRegia": "BullaRegia",
-};
-
-function resolveLcDisplayName(value: string): string {
-  const cleaned = cleanLabel(String(value ?? "").trim());
-  return LC_DISPLAY_NAME_MAP[cleaned] ?? LC_DISPLAY_NAME_MAP[String(value ?? "").trim()] ?? cleaned;
 }
 const LOGO_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "svg"] as const;
 const LOGO_FOLDERS = ["/lc-logos", "/lc-logos-incoming"] as const;
@@ -204,7 +194,7 @@ function logoFileName(value: string): string {
     "medina": "Medina.png",
     "nabel": "Nabel.png",
     "university": "University.png",
-    "BullaRegia": "BullaRegia.png",
+    "6707": "6707.png",
     "bizerte": "Bizerte.png",
     "ruspina": "Ruspina.png",
     "sfax": "Sfax.png",
@@ -239,75 +229,44 @@ function logoSlug(value: string): string {
 }
 
 function buildRows(rows: DashboardRow[]): BoardRow[] {
-  const baseRows = rows
-    .filter((row) => String(row.row_id ?? "") !== "global")
-    .filter((row) => {
-      const rowId = String(row.row_id ?? "").trim();
-      const rowLabel = String(row.row_label ?? "").trim();
-      return !EXCLUDED_ROW_IDS.has(rowId) && !EXCLUDED_ROW_IDS.has(rowLabel);
-    })
-    .map((row, index) => {
-      const rawLabel = String(row.row_label ?? row.row_id ?? `Entity ${index + 1}`);
-      const label = resolveLcDisplayName(rawLabel);
-      const approvedTotal = toNumber(row, "approved_total");
-      const realizedTotal = toNumber(row, "realized_total");
-      const completedTotal = toNumber(row, "completed_total");
-      const finishedTotal = toNumber(row, "finished_total");
-      const appliedTotal = toNumber(row, "applied_total");
-      const o7 = toNumber(row, "o_approved_7");
-      const i7 = toNumber(row, "i_approved_7");
-      const o8 = toNumber(row, "o_approved_8");
-      const i8 = toNumber(row, "i_approved_8");
-      const o9 = toNumber(row, "o_approved_9");
-      const i9 = toNumber(row, "i_approved_9");
-
-      return {
-        rowId: resolveLcDisplayName(String(row.row_id ?? index + 1)),
-        label,
-        shortLabel: cleanLabel(label),
-        approvedTotal,
-        realizedTotal,
-        completedTotal,
-        finishedTotal,
-        appliedTotal,
-        o7,
-        i7,
-        o8,
-        i8,
-        o9,
-        i9,
-        score: approvedTotal * 10 + realizedTotal * 6 + completedTotal * 4 + finishedTotal * 2,
-        rank: 0,
-        color: COLORS[index % COLORS.length],
-      };
-    });
-
-  const zeroApdApplicantCounts = new Map<number, number>();
-  baseRows
-    .filter((row) => row.approvedTotal === 0)
-    .forEach((row) => {
-      zeroApdApplicantCounts.set(row.appliedTotal, (zeroApdApplicantCounts.get(row.appliedTotal) ?? 0) + 1);
-    });
-
-  return baseRows
-    .sort((a, b) => {
-      const aHasApd = a.approvedTotal > 0;
-      const bHasApd = b.approvedTotal > 0;
-
-      if (aHasApd && bHasApd) {
-        return b.approvedTotal - a.approvedTotal || b.realizedTotal - a.realizedTotal || a.shortLabel.localeCompare(b.shortLabel);
-      }
-
-      if (aHasApd !== bHasApd) {
-        return aHasApd ? -1 : 1;
-      }
-
-      return b.appliedTotal - a.appliedTotal || a.shortLabel.localeCompare(b.shortLabel);
-    })
-    .map((row, index) => {
-      const isZeroApdTie = row.approvedTotal === 0 && (zeroApdApplicantCounts.get(row.appliedTotal) ?? 0) > 1;
-      return { ...row, rank: isZeroApdTie ? "--" : index + 1 };
-    });
+ return rows
+ .filter((row) => String(row.row_id ?? "") !== "global")
+    .filter((row) => !EXCLUDED_ROW_IDS.has(String(row.row_id ?? "").trim()) && !EXCLUDED_ROW_IDS.has(String(row.row_label ?? "").trim()))
+ .map((row, index) => {
+ const label = String(row.row_label ?? row.row_id ?? `Entity ${index + 1}`);
+ const approvedTotal = toNumber(row, "approved_total");
+ const realizedTotal = toNumber(row, "realized_total");
+ const completedTotal = toNumber(row, "completed_total");
+ const finishedTotal = toNumber(row, "finished_total");
+ const appliedTotal = toNumber(row, "applied_total");
+ const o7 = toNumber(row, "o_approved_7");
+ const i7 = toNumber(row, "i_approved_7");
+ const o8 = toNumber(row, "o_approved_8");
+ const i8 = toNumber(row, "i_approved_8");
+ const o9 = toNumber(row, "o_approved_9");
+ const i9 = toNumber(row, "i_approved_9");
+ return {
+ rowId: String(row.row_id ?? index + 1),
+ label,
+ shortLabel: cleanLabel(label),
+ approvedTotal,
+ realizedTotal,
+ completedTotal,
+ finishedTotal,
+ appliedTotal,
+ o7,
+ i7,
+ o8,
+ i8,
+ o9,
+ i9,
+ score: approvedTotal * 10 + realizedTotal * 6 + completedTotal * 4 + finishedTotal * 2,
+ rank: 0,
+ color: COLORS[index % COLORS.length],
+ };
+ })
+ .sort((a, b) => b.approvedTotal - a.approvedTotal || b.realizedTotal - a.realizedTotal || a.shortLabel.localeCompare(b.shortLabel))
+ .map((row, index) => ({ ...row, rank: index + 1 }));
 }
 
 /* === LC LOGO RESOLVER v0_85 === */
@@ -324,7 +283,7 @@ const LC_LOGO_SLUGS: Record<string, string> = {
   "nabel": "nabel",
   "745": "university",
   "university": "university",
-  "BullaRegia": "BullaRegia",
+  "6707": "6707",
   "86": "bizerte",
   "bizerte": "bizerte",
   "1813": "ruspina",
@@ -609,7 +568,7 @@ export default function DashboardF1() {
       .map((row) =>
         `${row.shortLabel}  |  APPLIED ${row.appliedTotal}  >  APPROVED ${row.approvedTotal}  >  REALIZED ${row.realizedTotal}  >  COMPLETED ${row.completedTotal}  >  FINISHED ${row.finishedTotal}`
       )
-      .join("     ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢     ");
+      .join("     â€¢     ");
   }, [rows]);
 
 

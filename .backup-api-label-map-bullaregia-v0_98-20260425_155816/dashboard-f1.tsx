@@ -88,16 +88,6 @@ function initials(value: string): string {
  if (words.length === 1) return words[0].slice(0, 3).toUpperCase();
  return words.slice(0, 2).map((w) => w[0]).join("").toUpperCase();
 }
-
-const LC_DISPLAY_NAME_MAP: Record<string, string> = {
-  "6707": "BullaRegia",
-  "BullaRegia": "BullaRegia",
-};
-
-function resolveLcDisplayName(value: string): string {
-  const cleaned = cleanLabel(String(value ?? "").trim());
-  return LC_DISPLAY_NAME_MAP[cleaned] ?? LC_DISPLAY_NAME_MAP[String(value ?? "").trim()] ?? cleaned;
-}
 const LOGO_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "svg"] as const;
 const LOGO_FOLDERS = ["/lc-logos", "/lc-logos-incoming"] as const;
 
@@ -248,7 +238,7 @@ function buildRows(rows: DashboardRow[]): BoardRow[] {
     })
     .map((row, index) => {
       const rawLabel = String(row.row_label ?? row.row_id ?? `Entity ${index + 1}`);
-      const label = resolveLcDisplayName(rawLabel);
+      const label = rawLabel === "6707" ? "BullaRegia" : rawLabel;
       const approvedTotal = toNumber(row, "approved_total");
       const realizedTotal = toNumber(row, "realized_total");
       const completedTotal = toNumber(row, "completed_total");
@@ -262,7 +252,7 @@ function buildRows(rows: DashboardRow[]): BoardRow[] {
       const i9 = toNumber(row, "i_approved_9");
 
       return {
-        rowId: resolveLcDisplayName(String(row.row_id ?? index + 1)),
+        rowId: String(row.row_id ?? index + 1) === "6707" ? "BullaRegia" : String(row.row_id ?? index + 1),
         label,
         shortLabel: cleanLabel(label),
         approvedTotal,
@@ -609,7 +599,7 @@ export default function DashboardF1() {
       .map((row) =>
         `${row.shortLabel}  |  APPLIED ${row.appliedTotal}  >  APPROVED ${row.approvedTotal}  >  REALIZED ${row.realizedTotal}  >  COMPLETED ${row.completedTotal}  >  FINISHED ${row.finishedTotal}`
       )
-      .join("     ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢     ");
+      .join("     ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢     ");
   }, [rows]);
 
 
