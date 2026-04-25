@@ -1,6 +1,6 @@
 {
   "name": "f1-hackathon-dashboard",
-  "version": "0.1.80",
+  "version": "0.1.81",
   "private": true,
   "scripts": {
     "dev": "next dev",
