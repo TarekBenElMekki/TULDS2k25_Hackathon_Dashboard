@@ -1,0 +1,13 @@
+﻿Put LC logo files here. Recommended filenames:
+- hadrumet.png
+- bardo.png
+- carthage.png
+- medina.png
+- nabel.png
+- university.png
+- 6707.png
+- bizerte.png
+- ruspina.png
+- sfax.png
+- tacapes.png
+- thyna.png

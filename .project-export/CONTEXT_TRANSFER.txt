@@ -1,0 +1,140 @@
+=========================================
+CONTEXT TRANSFER
+=========================================
+Generated: 2026-04-25 15:14:21
+Project root: C:\Users\tarek\Downloads\f1-hackathon-dashboard_final
+
+Use this bundle to continue work in another conversation or environment.
+
+SUMMARY
+- Total directories exported: 41
+- Total files exported: 149
+- Hidden export folder: .project-export
+
+TOP-LEVEL DIRECTORIES
+- .backup-before-clean
+- .backup-card-gif-v0_40-20260424_195100
+- .backup-default-names-only-v0_83-20260425_144452
+- .backup-existing-png-logos-v0_89-20260425_150314
+- .backup-final-safe-v0_52-20260424_203526
+- .backup-final-stabilizer-v0_44-20260424_200407
+- .backup-global12-carousel-v0_49-20260424_202140
+- .backup-global-top12-v0_48-20260424_201745
+- .backup-header-gif-v0_38-20260424_194451
+- .backup-header-gif-v0_39-20260424_194547
+- .backup-lc-logos-v0_85-20260425_144945
+- .backup-logo-path-fix-v0_90-20260425_151033
+- .backup-names-with-logos-left-v0_82-20260425_144024
+- .backup-png-logos-v0_88-20260425_145808
+- .backup-png-logos-v0_88-20260425_150050
+- .backup-podium-label-no-cut-v0_87-20260425_145657
+- .backup-podium-p2-gif-v0_41-20260424_195357
+- .backup-podium-p2-gif-v0_43-20260424_195733
+- .backup-podium-restore-wheels-v0_46-20260424_201046
+- .backup-podium-split-gif-v0_45-20260424_200723
+- .backup-podium-swap-v0_47-20260424_201325
+- .backup-remove-header-middle-gif-v0_53-20260425_141720
+- .backup-sketch-layout-v0_36-20260424_134806
+- .backup-solid-headers-top12-applied-v0_50-20260424_202554
+- .backup-solid-table-headers-no-bleed-v0_54-20260425_142912
+- .backup-solid-table-headers-no-bleed-v0_55-20260425_143119
+- .project-export
+- public
+- scripts
+- src
+
+TOP-LEVEL FILES
+- .env.local
+- .env.local.example
+- .gitignore
+- agent.ps1
+- AGENTS.md
+- CLAUDE.md
+- Dahsboard_F1_Style_Patch_v0_1.ps1
+- Dahsboard_F1_Style_Patch_v0_10.ps1
+- Dahsboard_F1_Style_Patch_v0_10.txt
+- Dahsboard_F1_Style_Patch_v0_11.ps1
+- Dahsboard_F1_Style_Patch_v0_12.ps1
+- Dahsboard_F1_Style_Patch_v0_13.ps1
+- Dahsboard_F1_Style_Patch_v0_13.txt
+- Dahsboard_F1_Style_Patch_v0_14.ps1
+- Dahsboard_F1_Style_Patch_v0_14.txt
+- Dahsboard_F1_Style_Patch_v0_15.ps1
+- Dahsboard_F1_Style_Patch_v0_16.ps1
+- Dahsboard_F1_Style_Patch_v0_16ps1.txt
+- Dahsboard_F1_Style_Patch_v0_17.ps1
+- Dahsboard_F1_Style_Patch_v0_18.ps1
+- Dahsboard_F1_Style_Patch_v0_19.ps1
+- Dahsboard_F1_Style_Patch_v0_2.ps1
+- Dahsboard_F1_Style_Patch_v0_20.ps1
+- Dahsboard_F1_Style_Patch_v0_21.ps1
+- Dahsboard_F1_Style_Patch_v0_22.ps1
+- Dahsboard_F1_Style_Patch_v0_23.ps1
+- Dahsboard_F1_Style_Patch_v0_24.ps1
+- Dahsboard_F1_Style_Patch_v0_25.ps1
+- Dahsboard_F1_Style_Patch_v0_26.ps1
+- Dahsboard_F1_Style_Patch_v0_3.ps1
+- Dahsboard_F1_Style_Patch_v0_4.ps1
+- Dahsboard_F1_Style_Patch_v0_5.ps1
+- Dahsboard_F1_Style_Patch_v0_6.ps1
+- Dahsboard_F1_Style_Patch_v0_6.txt
+- Dahsboard_F1_Style_Patch_v0_7.ps1
+- Dahsboard_F1_Style_Patch_v0_8.ps1
+- Dahsboard_F1_Style_Patch_v0_9.ps1
+- Dashboard_F1_Blurred_GIF_Cards_Test_v0_40.ps1
+- Dashboard_F1_Create_And_Wire_LC_Logos_v0_84.ps1
+- Dashboard_F1_Create_And_Wire_LC_Logos_v0_85_PS5.ps1
+- Dashboard_F1_Default_Names_Only_v0_83.ps1
+- Dashboard_F1_Final_Safe_Table_Text_Fix_v0_52.ps1
+- Dashboard_F1_Final_Stabilizer_NoErrors_v0_44.ps1
+- Dashboard_F1_Final_TableSize_Mojibake_Fix_v0_51.ps1
+- Dashboard_F1_Fix_Logos_InPlace_v0_90.ps1
+- Dashboard_F1_Fix_Podium_Label_Not_Cut_v0_87.ps1
+- Dashboard_F1_Force_Podium_P2_GIF_Blur_v0_42.ps1
+- Dashboard_F1_Force_Podium_P2_GIF_Blur_v0_43.ps1
+- Dashboard_F1_Global12_ProductCarousel_v0_49.ps1
+- Dashboard_F1_GlobalTable_Top12_NoResize_v0_48.ps1
+- Dashboard_F1_Header_GIF_Center_v0_37.ps1
+- Dashboard_F1_Header_GIF_Center_v0_38.ps1
+- Dashboard_F1_Header_GIF_Center_v0_39.ps1
+- Dashboard_F1_Names_With_Logos_Left_v0_82.ps1
+- Dashboard_F1_Podium_Card_Split_GIF_v0_45.ps1
+- Dashboard_F1_Podium_P2_GIF_Blur_v0_41.ps1
+- Dashboard_F1_Podium_Swap_Name_Place_v0_47.ps1
+- Dashboard_F1_Readd_PNG_Logos_Correct_Naming_v0_86.ps1
+- Dashboard_F1_Readd_PNG_Logos_Correct_Naming_v0_88_PS5_FIXED.ps1
+- Dashboard_F1_Remove_Header_Middle_GIF_v0_53.ps1
+- Dashboard_F1_Restore_Podium_Wheels_v0_46.ps1
+- Dashboard_F1_Sketch_Layout_NoScroll_v0_36.ps1
+- Dashboard_F1_Solid_Table_Headers_No_Bleed_v0_54.ps1
+- Dashboard_F1_Solid_Table_Headers_No_Bleed_v0_55.ps1
+- Dashboard_F1_SolidHeaders_Top12_AppliedTicker_v0_50.ps1
+- Dashboard_F1_Use_Existing_PNG_Logos_v0_89.ps1
+- eslint.config.mjs
+- Full_Project_Bundle_Generator.ps1
+- next.config.ts
+- next-env.d.ts
+- package.json
+- package-lock.json
+- postcss.config.mjs
+- README.md
+- Sans titre.txt
+- tsconfig.json
+- tsconfig.tsbuildinfo
+
+BUNDLE CONTENTS
+- PROJECT_STRUCTURE.txt -> directory and file map
+- FULL_CODEBASE_EXPORT.txt -> full readable export of included files
+- CONTEXT_TRANSFER.txt -> this summary and handoff note
+
+SUGGESTED HANDOFF PROMPT
+I am continuing work on this project. Please use the exported bundle in .project-export. Start by reading CONTEXT_TRANSFER.txt, then PROJECT_STRUCTURE.txt, then inspect FULL_CODEBASE_EXPORT.txt for implementation details. Help me continue from the current codebase without re-architecting unless needed.
+
+EXCLUSIONS
+- Common generated/build folders were excluded
+- Binary/media/document/font/archive files were excluded
+- The export folder itself was excluded from re-export
+
+NOTES
+- This export is intended for code review, migration, and context transfer.
+- If you need binary assets too, use a separate archive/export flow.
